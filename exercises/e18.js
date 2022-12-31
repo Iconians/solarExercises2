@@ -7,6 +7,17 @@ import { data } from "../data/data";
 export function getGreatestDiscoveryYear(data) {
   // Your code goes here...
   // feel free to import your `maxBy` or `minBy` methods from previous lessons
+  const yearsAsteroidsFound = data.asteroids.map((asteroid) => asteroid.discoveryYear).reduce((allDates, date) => {
+    const currcount = allDates[date] ?? 0
+    let countedYears = {
+      ...allDates,
+      [date]: currcount + 1
+    }
+    return countedYears
+  })
+  const yearMostAsteroidsFound = Object.keys(yearsAsteroidsFound)
+  .reduce((acc, curr) => yearsAsteroidsFound[acc] > yearsAsteroidsFound[curr] ? acc : curr) 
+  return parseInt(yearMostAsteroidsFound)
 }
 
 // === TEST YOURSELF ===
